@@ -8,13 +8,26 @@ spring:
           routes:
             - id: inventory-route
               uri: lb://inventory-service
+              #        uri: http://localhost:8081
               predicates:
                 - Path=/api/v1/inventory/**
 
             - id: order-route
               uri: lb://order-service
+              #        uri: http://localhost:8082
               predicates:
                 - Path=/api/v1/order/**
+
+            - id: item-route
+              uri: lb://item-service
+              # [http://localhost:3000/](http://localhost:3000/inventory-service/inventory)api/v1/item/details
+              predicates:
+                - Path=/api/v1/item/**
+
+            - id: customer-route
+              uri: http://localhost:5000
+              predicates:
+                - Path=/api/v1/customer/**
 
 server:
   port: 8080
